@@ -21,12 +21,31 @@ export default function Home() {
   return (
     <ResponsiveContainer width='100%' height={400}>
       <AreaChart data={data}>
-        <Area dataKey='value' />
+        <defs>
+          <linearGradient id='color' x1='0' y1='0' x2='0' y2='1'>
+            <stop offset='0%' stopColor='#2451b7' stopOpacity={0.4} />
+            <stop offset='75%' stopColor='#2451b7' stopOpacity={0.05} />
+          </linearGradient>
+        </defs>
+
+        <Area dataKey='value' stroke='#2451b7' fill='url(#color)' />
+
         <XAxis dataKey='date' />
-        <YAxis dataKey='value' />
+
+        <YAxis 
+          dataKey='value' 
+          axisLine={false} 
+          tickLine={false} 
+          tickCount={8}
+          tickFormatter={number => `$${number.toFixed(2)}`}
+        />
+
         <Tooltip />
-        <CartesianGrid />
+
+        <CartesianGrid opacity={0.1} vertical={false} />
+
       </AreaChart>
+
     </ResponsiveContainer>
   )
 }
