@@ -30,7 +30,20 @@ export default function Home() {
 
         <Area dataKey='value' stroke='#2451b7' fill='url(#color)' />
 
-        <XAxis dataKey='date' />
+        <XAxis 
+          dataKey='date' 
+          axisLine={false} 
+          tickLine={false}
+          tickFormatter={str => {
+            // string to date object
+            const date = parseISO(str);
+            // check if divisible by 7
+            if(date.getDate() % 7 === 0) {
+              return format(date, 'MMM, d');
+            }
+            return '';
+          }}
+        />
 
         <YAxis 
           dataKey='value' 
