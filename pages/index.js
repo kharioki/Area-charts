@@ -13,7 +13,8 @@ const data = [];
 for(let num = 30; num >=0; num--) {
   data.push({
     date: subDays(new Date(), num).toISOString().substring(0, 10),
-    value: 1 + Math.random()
+    value: 1 + Math.random(),
+    value2: 1 - Math.random()
   })
 }
 
@@ -29,6 +30,7 @@ export default function Home() {
         </defs>
 
         <Area dataKey='value' stroke='#2451b7' fill='url(#color)' />
+        <Area dataKey='value2' stroke='#a451b7' fill='url(#color)' />
 
         <XAxis 
           dataKey='date' 
@@ -69,6 +71,7 @@ function CustomTooltip({ active, payload, label }) {
       <div className='tooltip'>
         <h4>{format(parseISO(label), 'eeee, d MMM, yyyy')}</h4>
         <p>${payload[0].value.toFixed(2)} USD</p>
+        <p>${payload[1].value.toFixed(2)} CAD</p>
       </div>
     )
   }
