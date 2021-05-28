@@ -53,7 +53,7 @@ export default function Home() {
           tickFormatter={number => `$${number.toFixed(2)}`}
         />
 
-        <Tooltip />
+        <Tooltip content={ <CustomTooltip /> } />
 
         <CartesianGrid opacity={0.1} vertical={false} />
 
@@ -61,4 +61,17 @@ export default function Home() {
 
     </ResponsiveContainer>
   )
+}
+
+function CustomTooltip({ active, payload, label }) {
+  if(active) {
+    return (
+      <div className='tooltip'>
+        <h4>{format(parseISO(label), 'eeee, d MMM, yyyy')}</h4>
+        <p>${payload[0].value.toFixed(2)} USD</p>
+      </div>
+    )
+  }
+
+  return null;
 }
